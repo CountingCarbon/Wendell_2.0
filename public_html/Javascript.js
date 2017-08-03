@@ -153,6 +153,27 @@ function ravelForDb(key, value) {
     return value;
 }
 
+function getObject(email){
+    //var request = db.transaction([osn]).objectStore(osn).get(email);
+    var transaction = db.transaction([osn]);
+    var objectStore = transaction.objectStore(osn);
+    var request = objectStore.get(email);
+    //if the get function returns an error
+    request.onerror = function(event) {
+        alert("Unable to retrieve data from database!");
+    };
+    //if the get function returns no errors (entry still not necessarily in the db)
+    request.onsuccess = function(event) {
+        if(request.result){
+            return request.result;
+            console.log(request.result);
+        }
+        else{
+            console.log("SHIT");
+        }
+    };
+}
+
 function readall(){
     var objectStore = db.transaction(osn).objectStore(osn);
     var request = objectStore.openCursor();
