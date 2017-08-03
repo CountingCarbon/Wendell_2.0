@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<title>Set Preferences</title>
+</head>
+<body>
+	<div id="container">
+		<header>
+			<h1> <!--<span class="blue-text">Blue</span>--> Your Preferences</h1>
+			<!--<h2>Sign Up Now <span class="white-text">NOW</span></h2>-->
+		</header>
+		
+		<!--<nav id="menu">
+			<ul>
+				<li class="menuitem"><a href="index.html">Home</a></li>
+				<li class="menuitem"><a href="about.html">About Us</a></li>
+				<li class="menuitem"><a href="browse.html">Browse Developers</a></li>
+				<li class="menuitem"><a href="contact.html">Contact Us</a></li>
+			</ul>
+	     </nav>-->
+		 
+		<!-- <nav id="leftmenu">
+        <h3>Links</h3>
+			<ul>
+				<li><a href="browse.html">SEO</a></li>
+				<li><a href="browse.html">PHP</a></li>
+				<li><a href="browse.html">Ajax</a></li>
+				<li><a href="browse.html">jQuery</a></li>
+				<li><a href="browse.html">Web design</a></li>
+				<li><a href="browse.html">Web Programming</a></li>
+				<li><a href="browse.html">Content Creation</a></li>
+				<li><a href="browse.html">Internet Marketing</a></li>
+				<li><a href="browse.html">XHTML Templates</a></li>
+			</ul>
+		</nav>
+		-->
+    
+	<section>
+			<!--<h3>Sign Up</h3>-->
+			<!--<p>Please use this form to contact a member of our website team</p>-->
+			<form method="post" action="somescript.php">
+				<!--<p>
+					<label for="name">Name:</label>
+					<input type="text" name="name">
+				</p>
+				<p>
+					<label for="email">Email Address: </label>
+					<input type="email" name="email">
+				</p>
+				<p>
+					<label for="Password">Password: </label>
+					<input type="text" name="Password">
+				</p>
+				<p>
+					<label for="call">Best Time To Call: </label>
+					<input type="radio" name="time" value="morning" checked>Morning
+					<input type="radio" name="time" value="noon">Noon
+					<input type="radio" name="time" value="evening">Evening
+				</p>
+
+				<p>
+					<label for="location">Location: </label>
+					<input list="location">
+					<datalist id="location">
+					<option value="Dublin"></option>
+					<option value="London"></option>
+					<option value="Edinburgh"></option>
+					</datalist>
+				</p>-->
+
+		<fieldset>
+		<legend>What's Important to You?</legend>
+
+				<p>
+
+				<script type="text/javascript"> function updateTextInput(val) { document.getElementById('textInput').value=val;}
+				</script>
+
+				<label for="Environmental Impact">Environmental Impact: </label>
+
+				<input id ="Environmental Impact" type="range" name="Environmental Impact" min="0" max="100" onchange="updateTextInput(this.value)">
+				<input id="textInput" type="text">
+			
+				</p>
+
+				<p>
+
+				<script type="text/javascript"> function updateTextInput(val) { document.getElementById('textInput').value=val;}
+				</script>
+
+				<label for="Health">Health: </label>
+
+				<input id ="Health" type="range" name="Health" min="0" max="100" onchange="updateTextInput(this.value)">
+				<input id="textInput" type="text">
+
+				</p>
+
+				<p>
+				<script type="text/javascript"> function updateTextInput(val) { document.getElementById('textInput').value=val;}
+				</script>
+
+				<label for="Cost">Cost: </label>
+
+				<input id ="Cost" type="range" name="Cost" min="0" max="100" onchange="updateTextInput(this.value)">
+				<input id="textInput" type="text">
+
+				</p>
+
+
+
+				<p>
+					<label for="call">Dietary Requirements: (Check all that apply) </label>
+					<table>
+						<tr>
+							<td><input type="checkbox" name="dietary" value="vegetarian">Vegetarian</td>
+							<td><input type="checkbox" name="dietary" value="vegan">Vegan</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="dietary" value="gluten">Gluten Free</td>
+							<td><input type="checkbox" name="dietary" value="lactose">Lactose Free</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="dietary" value="halal">Halal</td>
+							<td><input type="checkbox" name="dietary" value="kosher">Kosher</td>
+						</tr>
+					</table>
+				</p>
+				
+				</fieldset>
+
+				<p>
+					<input type="submit" value="Set Parameters">
+				</p>
+			</form>
+
+				<p>
+				<a href="menu.html">Get Started</a>
+				</p>
+    <section><!--content end-->
+	
+</div><!--container end-->
+</body>
+</html>

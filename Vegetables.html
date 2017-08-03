@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<title>New Shopping List</title>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1><span class="blue-text">Shopping List</span></h1>
+        </header>
+        
+        <nav id="menu">
+            <ul>
+                <li class="menuitem"><a href="menu.html">Menu</a></li>
+                <li class="menuitem"><a href="Preferences.html">Preferences</a></li>
+                <li class="menuitem"><a href="NewList.html">Back</a></li>
+         </nav><!--menu end-->
+         
+         <nav id="leftmenu">
+        <h3>Vegetables</h3>
+           
+            <p>
+                <input type="text" name="search" placeholder="Search..">
+            </p>
+        </nav><!--leftmenu end-->
+
+
+        <button class="accordion">Carrots
+        </button>
+            <div class="panel">
+                <button class="accordion">Fresh Carrots</button>
+                    <ul>
+                        <li>Health</li>
+                        <li>Environmental Impact</li>
+                        <li>Cost</li>
+                    </ul>
+                <button class="accordion">Tinned Carrots</button>
+                    <ul>
+                        <li>Health</li>
+                        <li>Environmental Impact</li>
+                        <li>Cost</li>
+                    </ul>
+                <button class="accordion">Jarred Carrots</button>
+                    <ul>
+                        <li>Health</li>
+                        <li>Environmental Impact</li>
+                        <li>Cost</li>
+                    </ul>
+                <button class="accordion">Frozen Carrots</button>
+                    <ul>
+                        <li>Health</li>
+                        <li>Environmental Impact</li>
+                        <li>Cost</li>
+                    </ul>
+            </div>
+
+        <button class="accordion">Tomatoes</button>
+            <div class="panel">
+                <button class="accordion">Fresh Tomatoes</button>
+                    <ul>
+                        <li>Health</li>
+                        <li>Environmental Impact</li>
+                        <li>Cost</li>
+                    </ul>
+                <button class="accordion">Tinned Tomatoes</button>
+                    <ul>
+                        <li>Health</li>
+                        <li>Environmental Impact</li>
+                        <li>Cost</li>
+                    </ul>
+            </div>
+
+        <button class="accordion">Lettuce</button>
+            <div class="panel">
+                <button class="accordion">Fresh Lettuce</button>
+                    <ul>
+                        <li>Health</li>
+                        <li>Environmental Impact</li>
+                        <li>Cost</li>
+                    </ul>
+                <button class="accordion">Packaged Lettuce</button>
+                    <ul>
+                        <li>Health</li>
+                        <li>Environmental Impact</li>
+                        <li>Cost</li>
+                    </ul>
+            </div>
+
+        <script type="text/javascript">var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) 
+            {
+                 acc[i].onclick = function()
+                 {
+                /* Toggle between adding and removing the "active" class,
+                to highlight the button that controls the panel */
+                this.classList.toggle("active");
+
+                    /* Toggle between hiding and showing the active panel */
+                     var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") 
+                    {
+                        panel.style.display = "none";
+                    } 
+                    else    
+                    {
+                        panel.style.display = "block";
+                    }
+                }
+            }
+        </script>    
+           
+
+	
+    </div><!--container end-->
+</body>
+</html>
