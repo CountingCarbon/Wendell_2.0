@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" href="style.css" type="text/css">
 <title>Set Preferences</title>
+<script type = "text/javascript" src = "preferences.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -10,74 +11,19 @@
 			<h1> <!--<span class="blue-text">Blue</span>--> Your Preferences</h1>
 			<!--<h2>Sign Up Now <span class="white-text">NOW</span></h2>-->
 		</header>
-		
-		<!--<nav id="menu">
-			<ul>
-				<li class="menuitem"><a href="index.html">Home</a></li>
-				<li class="menuitem"><a href="about.html">About Us</a></li>
-				<li class="menuitem"><a href="browse.html">Browse Developers</a></li>
-				<li class="menuitem"><a href="contact.html">Contact Us</a></li>
-			</ul>
-	     </nav>-->
-		 
-		<!-- <nav id="leftmenu">
-        <h3>Links</h3>
-			<ul>
-				<li><a href="browse.html">SEO</a></li>
-				<li><a href="browse.html">PHP</a></li>
-				<li><a href="browse.html">Ajax</a></li>
-				<li><a href="browse.html">jQuery</a></li>
-				<li><a href="browse.html">Web design</a></li>
-				<li><a href="browse.html">Web Programming</a></li>
-				<li><a href="browse.html">Content Creation</a></li>
-				<li><a href="browse.html">Internet Marketing</a></li>
-				<li><a href="browse.html">XHTML Templates</a></li>
-			</ul>
-		</nav>
-		-->
     
 	<section>
-			<!--<h3>Sign Up</h3>-->
-			<!--<p>Please use this form to contact a member of our website team</p>-->
-			<form method="post" action="somescript.php">
-				<!--<p>
-					<label for="name">Name:</label>
-					<input type="text" name="name">
-				</p>
-				<p>
-					<label for="email">Email Address: </label>
-					<input type="email" name="email">
-				</p>
-				<p>
-					<label for="Password">Password: </label>
-					<input type="text" name="Password">
-				</p>
-				<p>
-					<label for="call">Best Time To Call: </label>
-					<input type="radio" name="time" value="morning" checked>Morning
-					<input type="radio" name="time" value="noon">Noon
-					<input type="radio" name="time" value="evening">Evening
-				</p>
-
-				<p>
-					<label for="location">Location: </label>
-					<input list="location">
-					<datalist id="location">
-					<option value="Dublin"></option>
-					<option value="London"></option>
-					<option value="Edinburgh"></option>
-					</datalist>
-				</p>-->
+			<form>
 
 		<fieldset>
 		<legend>What's Important to You?</legend>
 
 				<p>
 
-				<script type="text/javascript"> function updateTextInput(val) { document.getElementById('textInput').value=val;}
+				<script type="text/javascript"> function updateTextInput(val,int) { document.getElementById('textInput').value=val;}
 				</script>
 
-				<label for="Environmental Impact">Environmental Impact: </label>
+				<label for="Environmental Impact">Environmental Impact:</label>
 
 				<input id ="Environmental Impact" type="range" name="Environmental Impact" min="0" max="100" onchange="updateTextInput(this.value)">
 				<input id="textInput" type="text">
@@ -86,24 +32,24 @@
 
 				<p>
 
-				<script type="text/javascript"> function updateTextInput(val) { document.getElementById('textInput').value=val;}
+				<script type="text/javascript"> function updateTextInput2(val) { document.getElementById('textInput2').value=val;}
 				</script>
 
 				<label for="Health">Health: </label>
 
-				<input id ="Health" type="range" name="Health" min="0" max="100" onchange="updateTextInput(this.value)">
-				<input id="textInput" type="text">
+				<input id ="Health" type="range" name="Health" min="0" max="100" onchange="updateTextInput2(this.value)">
+				<input id="textInput2" type="text">
 
 				</p>
 
 				<p>
-				<script type="text/javascript"> function updateTextInput(val) { document.getElementById('textInput').value=val;}
+				<script type="text/javascript"> function updateTextInput3(val) { document.getElementById('textInput3').value=val;}
 				</script>
 
 				<label for="Cost">Cost: </label>
 
-				<input id ="Cost" type="range" name="Cost" min="0" max="100" onchange="updateTextInput(this.value)">
-				<input id="textInput" type="text">
+				<input id ="Cost" type="range" name="Cost" min="0" max="100" onchange="updateTextInput3(this.value)">
+				<input id="textInput3" type="text">
 
 				</p>
 
@@ -130,7 +76,7 @@
 				</fieldset>
 
 				<p>
-					<input type="submit" value="Set Parameters">
+                                        <input type="button" onclick="parameter()" value="Submit">
 				</p>
 			</form>
 
