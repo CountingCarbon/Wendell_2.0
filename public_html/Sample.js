@@ -13,7 +13,7 @@ open.onupgradeneeded = function() {
 
 open.onupgradeneeded = function() {
     var db = open.result;
-    var store = db.createObjectStore("MyObjectStore", {keyPath: "id"});
+    var store = db.createObjectStore("MyObjectStore", {keyPath: "age"});
     var index = store.createIndex("NameIndex", ["name.first", "name.last"]);
 };
 
@@ -28,7 +28,7 @@ open.onsuccess = function() {
     var John = ({id: 12345, name: {first: "John", last: "Doe"}, age: 42});
     var Bob = ({id: 67890, name: {first: "Bob", last: "Smith"}, age: 35});
     var Claire = ({id: 11121, name: {first: "Claire", last: "Smith"}, age: 27});
-    var David = ({id: 11122, name: {first: "David", last: "Smith"}, age: 27});
+    var David = ({id: 11122, name: {first: "David", last: "Smith"}, age: 26});
     
     var supermarket = [John, Bob, Claire,David];
     
@@ -40,10 +40,10 @@ open.onsuccess = function() {
     //store.put(supermarket[2])
    
     // Query the data
-    var getJohn = store.get(12345);
+    var getJohn = store.get(42);
     var getBob = index.get(["Bob", "Smith"]);
-    var getClaire = store.get(11121);
-    var getDavid = store.get(11122);
+    var getClaire = store.get(27);
+    var getDavid = store.get(26);
 
     getJohn.onsuccess = function() {
         console.log(getJohn.result.name.first);  // => "John"
