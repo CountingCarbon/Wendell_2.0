@@ -1,8 +1,8 @@
 //Global variables
+dbname = "newDatabase";
 osn = "user";//objectstore name
 kpn = "email";//key path name, change in first item too
 paras = ["Environmental Impact","Health","Cost"];//Match the html values that the guys are inputting
-currentuser = {};//for passing users from page to page must be varible not global
 //////Set up database
 //making all indexed db version respond to the same call
 window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
@@ -15,7 +15,7 @@ if (!window.indexedDB) {
     window.alert("Your browser doesn't support a stable version of IndexedDB.");
 }
 var db;
-var request = window.indexedDB.open("newDatabase", 3);
+var request = window.indexedDB.open(dbname, 3);
 request.onerror = function(event) {
    console.log("error");
 };
@@ -27,7 +27,7 @@ request.onupgradeneeded = function(event) {
     db = event.target.result;
     var objectStore = db.createObjectStore(osn, {keyPath: kpn});
 
-    objectStore.add({email:'giveusmoney@gmail.com'});
+    objectStore.add({email:"current email holder",string:"example@email.com"});
 };
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////Database Complete///////////////////////////////////
@@ -121,7 +121,7 @@ function getForm(){
     usr2["string"] = objectstring;
     
     /////adds modified object (with encrypted original) to the database/////
-    var request = db.transaction(["user"], "readwrite").objectStore(osn).add(usr2);
+    var request = db.transaction([osn], "readwrite").objectStore(osn).add(usr2);
     
     request.onsuccess = function(event) {
         alert("Your account was created successfully\r\nWelcome to Counting Carbon");
@@ -130,7 +130,11 @@ function getForm(){
     request.onerror = function(event) {
         alert("That email is already associated with an account");
     };
-    currentuser = usr;
+ 
+    //Update the current email holder///////////////////////////////////////////
+    var holder = {email:"current email holder",string:"example@email.com"}
+    var request = db.transaction([osn], "readwrite").objectStore(osn).put("current email holder");
+
 };
 
 function unravelForDb(key, value) {
@@ -154,7 +158,6 @@ function ravelForDb(key, value) {
 }
 
 function getObject(email){
-    //var request = db.transaction([osn]).objectStore(osn).get(email);
     var transaction = db.transaction([osn]);
     var objectStore = transaction.objectStore(osn);
     var request = objectStore.get(email);
@@ -165,8 +168,10 @@ function getObject(email){
     //if the get function returns no errors (entry still not necessarily in the db)
     request.onsuccess = function(event) {
         if(request.result){
+            console.log(request.result.string);
+            console.log(typeof request.result.string);
             return request.result;
-            console.log(request.result);
+
         }
         else{
             console.log("SHIT");
@@ -182,7 +187,7 @@ function readall(){
     var cursor = event.target.result;
 
     if (cursor) {
-            console.log(cursor.value.string);
+            console.log(cursor.value.email);
             cursor.continue();
         }
         else {
@@ -195,12 +200,6 @@ function readall(){
     };
 }
 
-
-
-
-
-
-
 //Call the clear function when the page closes NBNBNBNBNBNBNB///////////////////
 //window.onbeforeunload = cleardb;
 ////////////////////////////////////////////////////////////////////////////////
@@ -209,7 +208,7 @@ function cleardb(){
     //Close database,can't delete and open database
     db.close();
 
-    var request = window.indexedDB.deleteDatabase("newDatabase",3);
+    var request = window.indexedDB.deleteDatabase(dbname,3);
 
     request.onerror = function(event) {
        console.log("error: in deletion");
