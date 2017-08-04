@@ -24,6 +24,7 @@ function food(name, E, H, P, cal, tag) {
     this.P = P; //price
     this.cal = cal; //calories
     this.tag = tag; //array of tags
+    this.current = false;
 
     this.print = function () {
         //display product info  
@@ -196,7 +197,9 @@ function cleardb() {
 window.onbeforeunload = cleardb;
 
 function getObject() {
-    var name = prompt("What would you like to search").toLowerCase();
+    //var name = prompt("What would you like to search").toLowerCase().trim();
+    name = document.getElementById("query").value;
+    name = name.toLowerCase().trim();
     var transaction = db.transaction([osn]);
     var objectStore = transaction.objectStore(osn);
     var request = objectStore.get(name);
@@ -220,10 +223,9 @@ function getObject() {
         }
     };
 }
-function closest(user){
-    //function 
-    
-    
+function sortInventory(user){
+    //function to sort lists based on user input
+      
 }
 
 /*
