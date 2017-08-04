@@ -120,8 +120,8 @@ Meat.prototype = new food();
 Dairy.prototype = new food();
 
 
-milk = new Dairy("Avonmore", "20", "Calcium", "100", ["protein", "fats", "Dairy"]);
-beef = new Meat("Brazillian", "50", "Protein", "150", ["iron", "protein"]);
+milk = new Dairy("avonmore", "20", "Calcium", "100", ["protein", "fats", "Dairy"]);
+beef = new Meat("brazillian", "50", "Protein", "150", ["iron", "protein"]);
 avocado = new Vegetable("avocado", "10g", "Protein", "100", ["protein", "fats", "salad", "superFood"]);
 rice = new Cereal("rice", "7g", "Carb", "120", ["carb", "energy", "grain"]);
 banana = new Fruit("banana", "8g", "carb", "150", ["complex carb", "low GI", "tasty"]);
@@ -196,7 +196,7 @@ function cleardb() {
 window.onbeforeunload = cleardb;
 
 function getObject() {
-    var name = prompt("What would you like to search");
+    var name = prompt("What would you like to search").toLowerCase();
     var transaction = db.transaction([osn]);
     var objectStore = transaction.objectStore(osn);
     var request = objectStore.get(name);
@@ -207,36 +207,52 @@ function getObject() {
     //if the get function returns no errors (entry still not necessarily in the db)
     request.onsuccess = function (event) {
         if (request.result) {
-            console.log(request.result.name);
+            var details = [];
+            var item = request.result;
+            console.log(item.name);
+            for(var i in item){
+               details[i] = item[i];
+               console.log(details[i]);
+            }
             // does not change other string
         } else {
             console.log("SHIT");
         }
     };
 }
+function closest(user){
+    //function 
+    
+    
+}
 
-function getProductInfo(name){
+/*
+function getProductInfo() {
+    var name = getObject().name;
     var transaction = db.transaction([osn]);
     var objectStore = transaction.objectStore(osn);
     var request = objectStore.get(name);
-    
+
     request.onerror = function (event) {
         alert("Unable to retrieve data from database!");
     };
-    
+
     request.onsuccess = function (event) {
+        var details = [];
         if (request.result) {
+            for (var i in item) {
+                details[i] = item[i];
+                console.log((item[i]));
+            }
             console.log(request.result.name);
             // does not change other string
         } else {
             console.log("SHIT");
         }
     };
-    
+
 }
-
-
-
+*/
 
 
 
