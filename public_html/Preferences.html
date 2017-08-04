@@ -59,16 +59,16 @@
 					<label for="call">Dietary Requirements: (Check all that apply) </label>
 					<table>
 						<tr>
-							<td><input type="checkbox" name="dietary" value="vegetarian">Vegetarian</td>
-							<td><input type="checkbox" name="dietary" value="vegan">Vegan</td>
+							<td><input id = "vegetarian" type="checkbox" name="dietary" value="vegetarian">Vegetarian</td>
+							<td><input id = "vegan" type="checkbox" name="dietary" value="vegan">Vegan</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox" name="dietary" value="gluten">Gluten Free</td>
-							<td><input type="checkbox" name="dietary" value="lactose">Lactose Free</td>
+							<td><input id = "gluten" type="checkbox" name="dietary" value="gluten">Gluten Free</td>
+							<td><input id = "lactose" type="checkbox" name="dietary" value="lactose">Lactose Free</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox" name="dietary" value="halal">Halal</td>
-							<td><input type="checkbox" name="dietary" value="kosher">Kosher</td>
+							<td><input id = "halal" type="checkbox" name="dietary" value="halal">Halal</td>
+							<td><input id = "kosher" type="checkbox" name="dietary" value="kosher">Kosher</td>
 						</tr>
 					</table>
 				</p>
@@ -76,7 +76,7 @@
 				</fieldset>
 
 				<p>
-                                        <input type="button" onclick="parameter()" value="Submit">
+                                        <input type="button" onclick="updateUser(parameter)" value="Submit">
 				</p>
 			</form>
 
