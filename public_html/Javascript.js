@@ -1,5 +1,5 @@
 //Global variables
-dbname = "newDatabase";
+dbname = "UserDatabase";
 osn = "user";//objectstore name
 kpn = "email";//key path name, change in first item too
 paras = ["Environmental Impact","Health","Cost"];//Match the html values that the guys are inputting
@@ -27,7 +27,7 @@ request.onupgradeneeded = function(event) {
     db = event.target.result;
     var objectStore = db.createObjectStore(osn, {keyPath: kpn});
 
-    objectStore.add({email:"current email holder",string:"example@email.com"});
+    objectStore.add({email:"current email holder",name:"example@email.com"});
 };
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////Database Complete///////////////////////////////////
@@ -132,8 +132,8 @@ function getForm(){
     };
  
     //Update the current email holder///////////////////////////////////////////
-    var holder = {email:"current email holder",string:"example@email.com"}
-    var request = db.transaction([osn], "readwrite").objectStore(osn).put("current email holder");
+    var holder = {email:"current email holder",name:email};
+    var request = db.transaction([osn], "readwrite").objectStore(osn).put(holder);
 
 };
 
@@ -187,7 +187,7 @@ function readall(){
     var cursor = event.target.result;
 
     if (cursor) {
-            console.log(cursor.value.email);
+            console.log(cursor.value.name);
             cursor.continue();
         }
         else {
