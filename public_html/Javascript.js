@@ -2,7 +2,6 @@
 osn = "user";//objectstore name
 kpn = "email";//key path name, change in first item too
 paras = ["Environmental Impact","Health","Cost"];//Match the html values that the guys are inputting
-currentuser = {};//for passing users from page to page must be varible not global
 //////Set up database
 //making all indexed db version respond to the same call
 window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
@@ -27,7 +26,7 @@ request.onupgradeneeded = function(event) {
     db = event.target.result;
     var objectStore = db.createObjectStore(osn, {keyPath: kpn});
 
-    objectStore.add({email:'giveusmoney@gmail.com'});
+    objectStore.add({email:"current email holder",string:"example@email.com"});
 };
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////Database Complete///////////////////////////////////
@@ -121,7 +120,7 @@ function getForm(){
     usr2["string"] = objectstring;
     
     /////adds modified object (with encrypted original) to the database/////
-    var request = db.transaction(["user"], "readwrite").objectStore(osn).add(usr2);
+    var request = db.transaction([osn], "readwrite").objectStore(osn).add(usr2);
     
     request.onsuccess = function(event) {
         alert("Your account was created successfully\r\nWelcome to Counting Carbon");
@@ -130,7 +129,22 @@ function getForm(){
     request.onerror = function(event) {
         alert("That email is already associated with an account");
     };
-    currentuser = usr;
+    /*
+    //Update the current email holder///////////////////////////////////////////
+    var request = db.transaction([osn], "readwrite").objectStore(osn).get("current email holder");
+    
+    request.onsuccess = function(event) {
+        var holder = request.result.value;
+        holder.email = email;
+        var request = db.transaction([osn], "readwrite").objectStore(osn).delete(request.result);
+        //adds modified object to db
+        var request = db.transaction([osn], "readwrite").objectStore(osn).add(holder);
+    };
+
+    request.onerror = function(event) {
+        alert("Error updating current user");
+    };
+    */
 };
 
 function unravelForDb(key, value) {
@@ -154,7 +168,6 @@ function ravelForDb(key, value) {
 }
 
 function getObject(email){
-    //var request = db.transaction([osn]).objectStore(osn).get(email);
     var transaction = db.transaction([osn]);
     var objectStore = transaction.objectStore(osn);
     var request = objectStore.get(email);
@@ -165,8 +178,9 @@ function getObject(email){
     //if the get function returns no errors (entry still not necessarily in the db)
     request.onsuccess = function(event) {
         if(request.result){
+            console.log(request.result.string);
+            console.log(typeof request.result.string);
             return request.result;
-            console.log(request.result);
         }
         else{
             console.log("SHIT");
