@@ -1,5 +1,5 @@
 //Global variables
-dbname = "newDatabase";
+dbname = "UserDatabase";
 osn = "user";//objectstore name
 kpn = "email";//key path name, change in first item too
 paras = ["Environmental Impact","Health","Cost"];//Match the html values that the guys are inputting

@@ -1,5 +1,5 @@
 /* global paras, diets, osn, kpn */
-dbname = "newDatabase";
+dbname = "UserDatabase";
 osn = "user";
 kpn = "email";
 paras = ["Environmental Impact","Health","Cost"];
@@ -21,29 +21,8 @@ request.onupgradeneeded = function(event) {
     objectStore.add({email:'giveusmoney@gmail.com'});
 };
 
-function getUser(email,func){
-    //var email = "peterpan@countingcarbonnow.com";//This needs to be passed fromn the previous html file
-    var transaction = db.transaction([osn]);
-    var objectStore = transaction.objectStore(osn);
-    var request = objectStore.get(email);
-    //if the get function returns an error
-    request.onerror = function(event) {
-        alert("Unable to retrieve data from database!");
-    };
-    //if the get function returns no errors (entry still not necessarily in the db)
-    request.onsuccess = function(event) {
-        if(request.result){
-            str = request.result.string;// does not change other string
-            func(str,email);
-        }
-        else{
-            console.log("SHIT");
-        }
-    };
-}
-
-//Call this function evertime you need to update the user and pass it the function that edits its parameter's
-function updateUser(innerfunc){
+//Call this function evertime you need to update the user and pass it the function that edits the specific part
+function updateCurrentUser(innerfunc){
     var transaction = db.transaction([osn]);
     var objectStore = transaction.objectStore(osn);
     var request = objectStore.get("current email holder");
@@ -54,7 +33,7 @@ function updateUser(innerfunc){
     //if the get function returns no errors (entry still not necessarily in the db)
     request.onsuccess = function(event) {
         if(request.result){
-            console.log(request.result.name + "has been updated");
+            console.log(request.result.name + " has been updated");
             getUser(request.result.name, innerfunc);
         }
         else{
@@ -92,6 +71,26 @@ function parameter(strg,email){
 ////////////////////////////////////////////////////////////////////////////////
 //Not called by html////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+function getUser(email,func){
+    //var email = "peterpan@countingcarbonnow.com";//This needs to be passed fromn the previous html file
+    var transaction = db.transaction([osn]);
+    var objectStore = transaction.objectStore(osn);
+    var request = objectStore.get(email);
+    //if the get function returns an error
+    request.onerror = function(event) {
+        alert("Unable to retrieve data from database!");
+    };
+    //if the get function returns no errors (entry still not necessarily in the db)
+    request.onsuccess = function(event) {
+        if(request.result){
+            str = request.result.string;// does not change other string
+            func(str,email);
+        }
+        else{
+            console.log("SHIT");
+        }
+    };
+}
 
 function readall(){
     var objectStore = db.transaction("user").objectStore("user");
