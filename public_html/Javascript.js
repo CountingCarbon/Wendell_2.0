@@ -171,6 +171,7 @@ function getObject(email){
             console.log(request.result.string);
             console.log(typeof request.result.string);
             return request.result;
+
         }
         else{
             console.log("SHIT");

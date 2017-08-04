@@ -7,29 +7,423 @@
 <body>
     <div id="container">
         <header>
-            <h1><span class="blue-text">Shopping List</span></h1>
-        </header>
-        
-        <nav id="menu">
+           <nav id="menu">
             <ul>
                 <li class="menuitem"><a href="menu.html">Menu</a></li>
                 <li class="menuitem"><a href="Preferences.html">Preferences</a></li>
-         </nav><!--menu end-->
-         
-         <nav id="leftmenu">
-        <h3>Food Types</h3>
-            <ul>
-                <li><a href="Vegetables.html">Vegetables</a></li>
-                <li><a href="browse.html">Cereals</a></li>
-                <li><a href="browse.html">Dairy</a></li>
-                <li><a href="browse.html">Meat</a></li>
-            </ul>
-            <p>
-                <input type="text" name="search" placeholder="Search..">
-            </p>
-        </nav><!--leftmenu end-->
+            </ul>     
+        </nav>
+        </header>
+    </div>
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'Items')" id="defaultOpen">Items</button>
+        <button class="tablinks" onclick="openCity(event, 'List')">List</button>
+    </div>
+    <div id="Items" class="tabcontent">
+        <div id="container">       
+            <nav id="leftmenu">
+                <h3>Food Types</h3>
+                    <button class="accordion">Vegetables</button>
+                        <div class="panel">
+                            <button class="accordion">Carrots</button>
+                                <div class="panel">
+                                    <button class="accordion">Fresh Carrots</button>
+                                        <ul>
+                                            <li>Health</li>
+                                            <li>Environmental Impact</li>
+                                            <li>Cost</li>
+                                        </ul>
+                                    <button class="accordion">Tinned Carrots</button>
+                                        <ul>
+                                            <li>Health</li>
+                                            <li>Environmental Impact</li>
+                                            <li>Cost</li>
+                                        </ul>
+                                    <button class="accordion">Jarred Carrots</button>
+                                        <ul>
+                                            <li>Health</li>
+                                            <li>Environmental Impact</li>
+                                            <li>Cost</li>
+                                        </ul>
+                                    <button class="accordion">Frozen Carrots</button>
+                                        <ul>
+                                            <li>Health</li>
+                                            <li>Environmental Impact</li>
+                                            <li>Cost</li>
+                                        </ul>
+                                </div>
 
-	
-</div><!--container end-->
+                            <button class="accordion">Tomatoes</button>
+                                <div class="panel">
+                                    <button class="accordion">Fresh Tomatoes</button>
+                                        <ul>
+                                            <li>Health</li>
+                                            <li>Environmental Impact</li>
+                                            <li>Cost</li>
+                                        </ul>
+                                    <button class="accordion">Tinned Tomatoes</button>
+                                        <ul>
+                                            <li>Health</li>
+                                            <li>Environmental Impact</li>
+                                            <li>Cost</li>
+                                        </ul>
+                                </div>
+
+                            <button class="accordion">Lettuce</button>
+                                <div class="panel">
+                                    <button class="accordion">Fresh Lettuce</button>
+                                        <ul>
+                                            <li>Health</li>
+                                            <li>Environmental Impact</li>
+                                            <li>Cost</li>
+                                        </ul>
+                                    <button class="accordion">Packaged Lettuce</button>
+                                        <ul>
+                                            <li>Health</li>
+                                            <li>Environmental Impact</li>
+                                            <li>Cost</li>
+                                        </ul>
+                                </div>
+                        </div>
+
+                    <button class="accordion">Cereals</button>
+                            <div class="panel">
+                                <button class="accordion">Bread</button>
+                                    <div class="panel">
+                                        <button class="accordion">Fresh Brown</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Fresh White</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Sliced Brown</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Sliced White</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                    </div>
+
+                                    <button class="accordion">Pasta</button>
+                                        <div class="panel">
+                                            <button class="accordion">Fresh Brown</button>
+                                                <ul>
+                                                    <li>Health</li>
+                                                    <li>Environmental Impact</li>
+                                                    <li>Cost</li>
+                                                </ul>
+                                            <button class="accordion">Fresh White</button>
+                                                <ul>
+                                                    <li>Health</li>
+                                                    <li>Environmental Impact</li>
+                                                    <li>Cost</li>
+                                                </ul>
+                                                <button class="accordion">Brown</button>
+                                                <ul>
+                                                    <li>Health</li>
+                                                    <li>Environmental Impact</li>
+                                                    <li>Cost</li>
+                                                </ul>
+                                            <button class="accordion">White</button>
+                                                <ul>
+                                                    <li>Health</li>
+                                                    <li>Environmental Impact</li>
+                                                    <li>Cost</li>
+                                                </ul>
+                                        </div>
+
+                                        <button class="accordion">Rice</button>
+                                            <div class="panel">
+                                                <button class="accordion">Brown Rice</button>
+                                                    <ul>
+                                                        <li>Health</li>
+                                                        <li>Environmental Impact</li>
+                                                        <li>Cost</li>
+                                                    </ul>
+                                                <button class="accordion">Basmati Rice</button>
+                                                    <ul>
+                                                        <li>Health</li>
+                                                        <li>Environmental Impact</li>
+                                                        <li>Cost</li>
+                                                    </ul>
+                                                <button class="accordion">White Rice</button>
+                                                    <ul>
+                                                        <li>Health</li>
+                                                        <li>Environmental Impact</li>
+                                                        <li>Cost</li>
+                                                    </ul>
+                                            </div>
+                                    </div>    
+
+                        <button class="accordion">Dairy</button>
+                            <div class="panel">
+                                <button class="accordion">Milk</button>
+                                    <div class="panel">
+                                        <button class="accordion">Soya</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Almond</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Fresh Cow Milk</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">UHT Cow Milk</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                    </div>
+
+                                <button class="accordion">Cheese</button>
+                                    <div class="panel">
+                                        <button class="accordion">Camembert</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Gouda</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                            <button class="accordion">Brie</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Cheddar</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                    </div>
+
+                                <button class="accordion">Yogurt</button>
+                                    <div class="panel">
+                                        <button class="accordion">Natural</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Organic Fruit Yogurt</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Fruit Yogurt</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                    </div>
+                            </div>    
+
+                        <button class="accordion">Meat</button>
+                            <div class="panel">
+                                <button class="accordion">Chicken</button>
+                                    <div class="panel">
+                                        <button class="accordion">Free Range Whole</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Free Range Breasts</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Free Range Legs</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Free Range Wings</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                    </div>
+
+                                <button class="accordion">Pork</button>
+                                    <div class="panel">
+                                        <button class="accordion">Bacon</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Chops</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Sausages</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                    </div>
+
+                                <button class="accordion">Beef</button>
+                                    <div class="panel">
+                                        <button class="accordion">Steak</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Mince</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                        <button class="accordion">Burger</button>
+                                            <ul>
+                                                <li>Health</li>
+                                                <li>Environmental Impact</li>
+                                                <li>Cost</li>
+                                            </ul>
+                                    </div>
+                            </div>
+
+                <p>
+                   <input type="text" name="search" placeholder="Search..">
+                </p>
+            </nav><!--leftmenu end-->
+        </div><!--container end-->
+    </div>
+    <div id="List" class="tabcontent">
+        <div id="container">
+            <nav id="leftmenu">
+                <h3>Food Types</h3>
+                <button class="accordion">Vegetables</button>
+                    <div class="panel">
+                        <button class="accordion">Fresh Carrots</button>
+                            <ul>
+                                <li>Health</li>
+                                <li>Environmental Impact</li>
+                                <li>Cost</li>
+                            </ul>
+                        <button class="accordion">Fresh Tomatoes</button>
+                            <ul>
+                                <li>Health</li>
+                                <li>Environmental Impact</li>
+                                <li>Cost</li>
+                            </ul>
+                    </div>
+                <button class="accordion">Cereals</button>
+                    <div class="panel">
+                        <button class="accordion">Fresh Pasta</button>
+                            <ul>
+                                <li>Health</li>
+                                <li>Environmental Impact</li>
+                                <li>Cost</li>
+                            </ul>
+                        <button class="accordion">Brown Rice</button>
+                            <ul>
+                                <li>Health</li>
+                                <li>Environmental Impact</li>
+                                <li>Cost</li>
+                            </ul>
+                    </div>
+                <button class="accordion">Dairy</button>
+                    <div class="panel"></div>
+                <button class="accordion">Meat</button>
+                    <div class="panel"></div>
+
+                <script type="text/javascript">var acc = document.getElementsByClassName("accordion");
+                    var i;
+                    for (i = 0; i < acc.length; i++) 
+                    {
+                        acc[i].onclick = function()
+                    {
+                    /* Toggle between adding and removing the "active" class,
+                    to highlight the button that controls the panel */
+                    this.classList.toggle("active");
+
+                    /* Toggle between hiding and showing the active panel */
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") 
+                    {
+                        panel.style.display = "none";
+                    } 
+                    else    
+                    {
+                        panel.style.display = "block";
+                    }
+                }
+                }
+                </script>    
+
+                <p>
+                    <input type="text" name="search" placeholder="Search..">
+                </p>
+            </nav>    
+        </div>    
+    </div>
+    
+    <script type="text/javascript">
+        document.getElementById("defaultOpen").click();    
+        function openCity(evt, cityName) 
+        {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) 
+            {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) 
+            {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>   
 </body>
 </html>
