@@ -1,4 +1,5 @@
 //Global variables
+dbname = "newDatabase";
 osn = "user";//objectstore name
 kpn = "email";//key path name, change in first item too
 paras = ["Environmental Impact","Health","Cost"];//Match the html values that the guys are inputting
@@ -14,7 +15,7 @@ if (!window.indexedDB) {
     window.alert("Your browser doesn't support a stable version of IndexedDB.");
 }
 var db;
-var request = window.indexedDB.open("newDatabase", 3);
+var request = window.indexedDB.open(dbname, 3);
 request.onerror = function(event) {
    console.log("error");
 };
@@ -129,22 +130,11 @@ function getForm(){
     request.onerror = function(event) {
         alert("That email is already associated with an account");
     };
-    /*
+ 
     //Update the current email holder///////////////////////////////////////////
-    var request = db.transaction([osn], "readwrite").objectStore(osn).get("current email holder");
-    
-    request.onsuccess = function(event) {
-        var holder = request.result.value;
-        holder.email = email;
-        var request = db.transaction([osn], "readwrite").objectStore(osn).delete(request.result);
-        //adds modified object to db
-        var request = db.transaction([osn], "readwrite").objectStore(osn).add(holder);
-    };
+    var holder = {email:"current email holder",string:"example@email.com"}
+    var request = db.transaction([osn], "readwrite").objectStore(osn).put("current email holder");
 
-    request.onerror = function(event) {
-        alert("Error updating current user");
-    };
-    */
 };
 
 function unravelForDb(key, value) {
@@ -196,7 +186,7 @@ function readall(){
     var cursor = event.target.result;
 
     if (cursor) {
-            console.log(cursor.value.string);
+            console.log(cursor.value.email);
             cursor.continue();
         }
         else {
@@ -209,12 +199,6 @@ function readall(){
     };
 }
 
-
-
-
-
-
-
 //Call the clear function when the page closes NBNBNBNBNBNBNB///////////////////
 //window.onbeforeunload = cleardb;
 ////////////////////////////////////////////////////////////////////////////////
@@ -223,7 +207,7 @@ function cleardb(){
     //Close database,can't delete and open database
     db.close();
 
-    var request = window.indexedDB.deleteDatabase("newDatabase",3);
+    var request = window.indexedDB.deleteDatabase(dbname,3);
 
     request.onerror = function(event) {
        console.log("error: in deletion");
