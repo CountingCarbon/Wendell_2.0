@@ -68,6 +68,7 @@ request.onsuccess = function (event) {
     displayMenuList("dairy");
     displayMenuList("vegetable");
     displayMenuList("cereal");
+    nameResults();
 };
 
 request.onupgradeneeded = function (event) {
@@ -229,7 +230,7 @@ function cleardb() {
     window.close(); //can't close a window the script didn't open
 }
 //Call the clear function when the page closes NBNBNBNBNBNBNB//////////////////////
-window.onbeforeunload = cleardb;
+//window.onbeforeunload = cleardb;
 
 /*function getObject() {
  //var name = prompt("What would you like to search").toLowerCase().trim();
@@ -269,7 +270,7 @@ function currentItem() {
     var request = objectStore.get(name);
     //if the get function returns an error
     request.onerror = function (event) {
-        alert("Unable to retrieve data from database!");
+        Console.log("Unable to retrieve data from database!");
     };
     //if the get function returns no errors (entry still not necessarily in the db)
     request.onsuccess = function (event) {
