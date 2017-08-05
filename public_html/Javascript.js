@@ -32,7 +32,6 @@ request.onupgradeneeded = function(event) {
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////Database Complete///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
 function user() {
     this.personal = function (name, email, password) {
         this.name = name;//This should match the global variable kpn
@@ -76,7 +75,6 @@ function user() {
         };
     };
 }
-
 function list() {
     //starting shite
     this.items = [];
@@ -102,7 +100,6 @@ function list() {
         }
     };
 }
-
 function getForm(){
     //new user
     usr = new user();
@@ -134,16 +131,13 @@ function getForm(){
     //Update the current email holder///////////////////////////////////////////
     var holder = {email:"current email holder",name:email};
     var request = db.transaction([osn], "readwrite").objectStore(osn).put(holder);
-
-};
-
+}
 function unravelForDb(key, value) {
     if (typeof value === 'function') {
         return value.toString();
     }
     return value;
 }
-
 function ravelForDb(key, value) {
 /////////usr2 = JSON.parse(objectstring, ravelForDb);
     if (value && typeof value === "string" && value.substr(0, 8) === "function") {
@@ -156,7 +150,6 @@ function ravelForDb(key, value) {
     }
     return value;
 }
-
 function getObject(email){
     var transaction = db.transaction([osn]);
     var objectStore = transaction.objectStore(osn);
@@ -178,7 +171,6 @@ function getObject(email){
         }
     };
 }
-
 function readall(){
     var objectStore = db.transaction(osn).objectStore(osn);
     var request = objectStore.openCursor();
