@@ -1,4 +1,44 @@
-//Set up database
+//Food Data
+milk = new Dairy("avonmore", "20", "Calcium", 15, "100", ["protein", "fats", "Dairy"]);
+avocado = new Vegetable("avocado", "10g", 13, "Protein", "100", ["protein", "fats", "salad", "superFood"]);
+rice = new Cereal("rice", "7g", "Carb", 12, "120", ["carb", "energy", "grain"]);
+banana = new Fruit("banana", "8g", "carb", 10, "150", ["complex carb", "low GI", "tasty"]);
+beef = new Meat("beef", 50, "E", 14, 150, ["protein", "fats", "iron"]);
+lamb = new Meat("lamb", 50, "E", 12, 120, ["carb", "energy", "grain"]);
+turkey = new Meat("turkey", 40, "B", 8, 100, ["protein", "fats", "salad", "superFood"]);
+pork = new Meat("pork", 40, "D", 5, 130, ["iron", "protein"]);
+pork.isHalal = false;
+tofu = new Meat("tofu", 20, "A", 12, 115, ["protein", "fats", "Dairy"]);
+tofu.isVegan = true;
+tofu.isVegetarian = true;
+quorn = new Meat("quorn", 20, "A", 12, 115, ["protein", "fats", "Dairy"]);
+quorn.isVegan = true;
+quorn.isVegetarian = true;
+venison = new Meat("venison", 35, "C", 12, 115, ["protein", "fats", "Dairy"]);
+bacon = new Meat("bacon", 40, "E", 12, 115, ["protein", "fats", "Dairy"]);
+bacon.isHalal = false;
+halloumi = new Meat("holloumi", 30, "B", 12, 115, ["protein", "fats", "Dairy"]);
+halloumi.hasLactose = true;
+halloumi.isVegetarian = true;
+chicken = new Meat("chicken", 25, "B", 12, 115, ["protein", "fats", "Dairy"]);
+ffmilk = new Dairy("full fat", 20, "C", 1.2, 100, ["protein", "fats", "Dairy"]);
+ssmilk = new Dairy("semi-skimmed", 30, "B", 1.2, 80, ["protein", "fats", "Dairy"]);
+soymilk = new Dairy("soy milk", 15, "A", 1.5, 70, ["protein", "fats", "Dairy"]);
+soymilk.isVegan = true;
+soymilk.hasLactose = false;
+cheddar = new Dairy("cheddar", 40, "C", 3.5, 120, ["protein", "fats", "Dairy"]);
+eggs = new Dairy("eggs", 22, "D", 1, 160, ["protein", "fats", "Dairy"]);
+goatscheese = new Dairy("goats cheese", 50, "B", 2, "110", ["protein", "fats", "Dairy"]);
+cheesesubstitute = new Dairy("cheese substitute", 9, "A", 4, "100", ["protein", "fats", "Dairy"]);
+cheesesubstitute.isVegan = true;
+tofu2 = new Dairy("silken tofu", 10, "A", 4.5, "140", ["protein", "fats", "Dairy"]);
+tofu2.isVegan = true;
+
+foodData = [milk, beef, avocado, rice, banana, lamb, turkey, pork, tofu, quorn, venison, bacon, halloumi, chicken, ffmilk, ssmilk, soymilk, cheddar, eggs, goatscheese, cheesesubstitute, tofu2];
+
+
+//******************************************************************************
+////Set up database
 //making all indexed db version respond to the same call
 window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 //Some other commands must also be "generalised"
@@ -11,11 +51,36 @@ window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.ms
 if (!window.indexedDB) {
     window.alert("Your browser doesn't support a stable version of IndexedDB.");
 }
+//******************************************************************************
+//Initialising database
 
-//const initdata = [
-//   {name:'potatoes', price:3.6, gofCO2:46, calories:7, tags:["protein","carb"]},
-// {name:'air', price:0, gofCO2:0, calories:0, tags:["carb"]}
-//];
+var db;
+var request = window.indexedDB.open("foodDatabase", 3);
+
+request.onerror = function (event) {
+    console.log("error: Databse not open");
+};
+
+request.onsuccess = function (event) {
+    db = request.result;
+    console.log("success: " + db);
+    displayMenuList("meat");
+    displayMenuList("dairy");
+    displayMenuList("vegetable");
+    displayMenuList("cereal");
+};
+
+request.onupgradeneeded = function (event) {
+    db = event.target.result;
+    var objectStore = db.createObjectStore("food", {keyPath: "name"});
+    for (var i in foodData) {
+        objectStore.add(foodData[i]);
+    }
+};
+
+
+
+
 
 function food(name, E, H, P, cal, tag) {
     this.name = name;
@@ -38,7 +103,7 @@ function food(name, E, H, P, cal, tag) {
 
 
 }
-;
+
 
 function Dairy(name, E, H, P, cal, tag) {
     this.name = name;
@@ -52,8 +117,8 @@ function Dairy(name, E, H, P, cal, tag) {
     this.isHalal = true;
     this.hasGluten = false;
     this.hasLactose = true;
+    this.type = "dairy";
 }
-;
 
 function Meat(name, E, H, P, cal, tag) {
     this.name = name;
@@ -67,8 +132,9 @@ function Meat(name, E, H, P, cal, tag) {
     this.isHalal = true;
     this.hasGluten = false;
     this.hasLactose = false;
+    this.type = "meat";
 }
-;
+
 
 function Vegetable(name, E, H, P, cal, tag) {
     this.name = name;
@@ -82,8 +148,9 @@ function Vegetable(name, E, H, P, cal, tag) {
     this.isHalal = true;
     this.hasGluten = false;
     this.hasLactose = false;
+    this.type = "vegetable";
 }
-;
+
 
 function Fruit(name, E, H, P, cal, tag) {
     this.name = name;
@@ -96,10 +163,10 @@ function Fruit(name, E, H, P, cal, tag) {
     this.isVeggie = true;
     this.isHalal = true;
     this.hasGluten = false;
-    this.hasLactose = false
-    this.current = false;
+    this.hasLactose = false;
+    this.type = "Fruit";
 }
-;
+
 
 function Cereal(name, E, H, P, cal, tag) {
     this.name = name;
@@ -113,48 +180,14 @@ function Cereal(name, E, H, P, cal, tag) {
     this.isHalal = true;
     this.hasGluten = false;
     this.hasLactose = false;
+    this.type = "cereal";
 }
-;
 
 Cereal.prototype = new food();
 Vegetable.prototype = new food();
 Meat.prototype = new food();
 Dairy.prototype = new food();
 Fruit.prototype = new food();
-
-milk = new Dairy("avonmore", "20", "Calcium", 15, "100", ["protein", "fats", "Dairy"]);
-beef = new Meat("brazillian", "50", "Protein", 14, "150", ["iron", "protein"]);
-avocado = new Vegetable("avocado", "10g", 13, "Protein", "100", ["protein", "fats", "salad", "superFood"]);
-rice = new Cereal("rice", "7g", "Carb", 12, "120", ["carb", "energy", "grain"]);
-banana = new Fruit("banana", "8g", "carb", 10, "150", ["complex carb", "low GI", "tasty"]);
-
-//beef.print();
-//milk.print();
-//avocado.print();
-//rice.print();
-//banana.print();
-
-foodData = [milk, beef, avocado, rice, banana];
-
-var db;
-var request = window.indexedDB.open("foodDatabase", 3);
-
-request.onerror = function (event) {
-    console.log("error: ");
-};
-
-request.onsuccess = function (event) {
-    db = request.result;
-    console.log("success: " + db);
-};
-
-request.onupgradeneeded = function (event) {
-    db = event.target.result;
-    var objectStore = db.createObjectStore("food", {keyPath: "name"});
-    for (var i in foodData) {
-        objectStore.add(foodData[i]);
-    }
-};
 
 function readAll() {
     var objectStore = db.transaction(osn).objectStore(osn);
@@ -164,6 +197,7 @@ function readAll() {
         var cursor = event.target.result;
 
         if (cursor) {
+            console.log(cursor.value.name);
             console.log(cursor.value.current);
             cursor.continue();
         } else {
@@ -195,7 +229,7 @@ function cleardb() {
     window.close(); //can't close a window the script didn't open
 }
 //Call the clear function when the page closes NBNBNBNBNBNBNB//////////////////////
-//window.onbeforeunload = cleardb;
+window.onbeforeunload = cleardb;
 
 /*function getObject() {
  //var name = prompt("What would you like to search").toLowerCase().trim();
@@ -294,7 +328,7 @@ function nameResults() {
             //}
             cursor.continue();
         } else {
-            alert("No more entries!");
+            console.log("No more entries!");
         }
     };
 
@@ -303,11 +337,6 @@ function nameResults() {
     };
 }
 
-
-
-function test() {
-    document.getElementById("nameOfFood").innerHTML = "Fuck you Harry";
-}
 
 /*function nameDisplay(name){
  //function to display on HTML screen
@@ -353,7 +382,42 @@ function userList(user) {
 
 
 }
+function displayMenuList(Ftype) {
+    var ID = Ftype + "List";
+    console.log(ID);
+    var list = document.getElementById(ID);
+    console.log("entered successfully");
+    var transaction = db.transaction([osn], "readwrite");
+    var objectStore = transaction.objectStore(osn);
+    var request = objectStore.openCursor();
 
+    objectStore.openCursor().onsuccess = function (event) {
+        var cursor = event.target.result;
+
+        if (cursor) {
+            if (cursor.value.type === Ftype) {
+                var item = cursor.value.name;
+                console.log(item);
+                var entry = document.createElement('li');
+                entry.appendChild(document.createTextNode(item));
+                list.appendChild(entry);
+                console.log(cursor.value.type);
+          }
+            cursor.continue();
+
+
+        } else {
+            console.log("No more entries!");
+        }
+    };
+
+    objectStore.openCursor().onerror = function (event) {
+        console.log("That didn't work");
+    };
+
+
+
+}
 
 
 
