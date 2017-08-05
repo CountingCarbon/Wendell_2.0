@@ -96,7 +96,8 @@ function Fruit(name, E, H, P, cal, tag) {
     this.isVeggie = true;
     this.isHalal = true;
     this.hasGluten = false;
-    this.hasLactose = false;
+    this.hasLactose = false
+    this.current = false;
 }
 ;
 
@@ -119,13 +120,13 @@ Cereal.prototype = new food();
 Vegetable.prototype = new food();
 Meat.prototype = new food();
 Dairy.prototype = new food();
+Fruit.prototype = new food();
 
-
-milk = new Dairy("avonmore", "20", "Calcium", "100", ["protein", "fats", "Dairy"]);
-beef = new Meat("brazillian", "50", "Protein", "150", ["iron", "protein"]);
-avocado = new Vegetable("avocado", "10g", "Protein", "100", ["protein", "fats", "salad", "superFood"]);
-rice = new Cereal("rice", "7g", "Carb", "120", ["carb", "energy", "grain"]);
-banana = new Fruit("banana", "8g", "carb", "150", ["complex carb", "low GI", "tasty"]);
+milk = new Dairy("avonmore", "20", "Calcium", 15, "100", ["protein", "fats", "Dairy"]);
+beef = new Meat("brazillian", "50", "Protein", 14, "150", ["iron", "protein"]);
+avocado = new Vegetable("avocado", "10g", 13, "Protein", "100", ["protein", "fats", "salad", "superFood"]);
+rice = new Cereal("rice", "7g", "Carb", 12, "120", ["carb", "energy", "grain"]);
+banana = new Fruit("banana", "8g", "carb", 10, "150", ["complex carb", "low GI", "tasty"]);
 
 //beef.print();
 //milk.print();
@@ -163,7 +164,7 @@ function readAll() {
         var cursor = event.target.result;
 
         if (cursor) {
-            console.log(cursor.value.name);
+            console.log(cursor.value.current);
             cursor.continue();
         } else {
             alert("No more entries!");
@@ -194,13 +195,42 @@ function cleardb() {
     window.close(); //can't close a window the script didn't open
 }
 //Call the clear function when the page closes NBNBNBNBNBNBNB//////////////////////
-window.onbeforeunload = cleardb;
+//window.onbeforeunload = cleardb;
 
-function getObject() {
+/*function getObject() {
+ //var name = prompt("What would you like to search").toLowerCase().trim();
+ name = document.getElementById("query").value;
+ name = name.toLowerCase().trim();
+ var transaction = db.transaction([osn]);
+ var objectStore = transaction.objectStore(osn);
+ var request = objectStore.get(name);
+ //if the get function returns an error
+ request.onerror = function (event) {
+ alert("Unable to retrieve data from database!");
+ };
+ //if the get function returns no errors (entry still not necessarily in the db)
+ request.onsuccess = function (event) {
+ if (request.result) {
+ var details = [];
+ var item = request.result;
+ console.log(item.name);
+ for(var i in item){
+ details[i] = item[i];
+ console.log(details[i]);
+ }
+ Display(item.name);
+ // does not change other string
+ } else {
+ console.log("SHIT");
+ }
+ };
+ }
+ */
+function currentItem() {
     //var name = prompt("What would you like to search").toLowerCase().trim();
     name = document.getElementById("query").value;
     name = name.toLowerCase().trim();
-    var transaction = db.transaction([osn]);
+    var transaction = db.transaction([osn], "readwrite");
     var objectStore = transaction.objectStore(osn);
     var request = objectStore.get(name);
     //if the get function returns an error
@@ -209,52 +239,120 @@ function getObject() {
     };
     //if the get function returns no errors (entry still not necessarily in the db)
     request.onsuccess = function (event) {
-        if (request.result) {
-            var details = [];
-            var item = request.result;
-            console.log(item.name);
-            for(var i in item){
-               details[i] = item[i];
-               console.log(details[i]);
-            }
-            // does not change other string
+        var item = request.result;
+        item.current = true;
+        console.log(item.current);
+        objectStore.put(item);
+        readAll();
+
+    };
+    window.location.href = "SearchResults.html";
+}
+
+function nameResults() {
+    var objectStore = db.transaction([osn], "readwrite").objectStore(osn);
+    var request = objectStore.openCursor();
+
+    objectStore.openCursor().onsuccess = function (event) {
+        var cursor = event.target.result;
+
+        if (cursor) {
+            var name = cursor.value.name;
+            //console.log(cursor.value.current);
+            var foodRequest = objectStore.get(name);
+            foodRequest.onsuccess = function () {
+                var item = foodRequest.result;
+                if (item.current === true) {
+                    document.getElementById("nameOfFood").innerHTML = item.name;
+                    //new
+                    //health
+                    var list = document.getElementById('healthOfFood');
+                    console.log("enter successfully");
+                    var health = "Health: " + item.H;
+                    var environ = "Environmental Impact: " + item.E;
+                    var cost = "Cost: " + item.P;
+                    var entry1 = document.createElement('li');
+                    var entry2 = document.createElement('li');
+                    var entry3 = document.createElement('li');
+                    entry1.appendChild(document.createTextNode(health));
+                    entry2.appendChild(document.createTextNode(environ));
+                    entry3.appendChild(document.createTextNode(cost));
+                    list.appendChild(entry1);
+                    list.appendChild(entry2);
+                    list.appendChild(entry3);
+                    item.current = false;
+                    objectStore.put(item);
+                }
+
+            };
+            // console.log(foodRequest.result);
+            //if(request.result.current === true){
+            //  console.log(request.result.name);
+            //}
+            //if(item.current){
+            //console.log(item);
+            //}
+            cursor.continue();
         } else {
-            console.log("SHIT");
+            alert("No more entries!");
         }
     };
+
+    objectStore.openCursor().onerror = function (event) {
+        console.log("That didn't work");
+    };
 }
-function sortInventory(user){
-    //function to sort lists based on user input
-      
+
+
+
+function test() {
+    document.getElementById("nameOfFood").innerHTML = "Fuck you Harry";
 }
+
+/*function nameDisplay(name){
+ //function to display on HTML screen
+ document.write(name);   
+ }*/
 
 /*
-function getProductInfo() {
-    var name = getObject().name;
-    var transaction = db.transaction([osn]);
-    var objectStore = transaction.objectStore(osn);
-    var request = objectStore.get(name);
+ function getProductInfo() {
+ var name = getObject().name;
+ var transaction = db.transaction([osn]);
+ var objectStore = transaction.objectStore(osn);
+ var request = objectStore.get(name);
+ 
+ request.onerror = function (event) {
+ alert("Unable to retrieve data from database!");
+ };
+ 
+ request.onsuccess = function (event) {
+ var details = [];
+ if (request.result) {
+ for (var i in item) {
+ details[i] = item[i];
+ console.log((item[i]));
+ }
+ console.log(request.result.name);
+ // does not change other string
+ } else {
+ console.log("SHIT");
+ }
+ };
+ 
+ }
+ */
 
-    request.onerror = function (event) {
-        alert("Unable to retrieve data from database!");
-    };
+function userList(user) {
+    //ensure user is changed to current to enable to receive stuff from user
+    //take user name from HTML
+    //Get user from database
+    //take parameters
+    //cycle through each food item
+    //remove those which the user can't have
+    //suggest similar items which are close to the user wants
 
-    request.onsuccess = function (event) {
-        var details = [];
-        if (request.result) {
-            for (var i in item) {
-                details[i] = item[i];
-                console.log((item[i]));
-            }
-            console.log(request.result.name);
-            // does not change other string
-        } else {
-            console.log("SHIT");
-        }
-    };
 
 }
-*/
 
 
 
