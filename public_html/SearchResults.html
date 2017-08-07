@@ -2,8 +2,7 @@
 <html>
     <head>
         <script type = "text/javascript" src="Food.js"></script>
-        <script type = "text/javascript" src="searchResults.js"></script>
-        <link rel="stylesheet" href="style.css" type="text/css">
+          <link rel="stylesheet" href="style.css" type="text/css">
         <title>New Shopping List</title>
     </head>
     <body>
@@ -34,11 +33,13 @@
 
                     <p>
                         <input  type="text" id="query" name="search" placeholder="Search..">
-                        <input type="button" onclick="getObject()" value="Submit">
+                        <input type="button" onclick="currentItem()" value="Submit">
                     </p>
                     <script type="text/javascript">
                         nameResults();
                     </script>
+                    
+                    <button type = "button" onclick="addToList()" > Add </button>
                 </nav><!--leftmenu end-->
             </div><!--container end-->
         </div>

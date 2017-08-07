@@ -2,7 +2,6 @@
 <html>
     <head>
         <script type = "text/javascript" src="Food.js"></script>
-        <script type = "text/javascript" src="NewList.js"></script>
         <link rel="stylesheet" href="style.css" type="text/css">
         <title>New Shopping List</title>
     </head>
@@ -25,36 +24,43 @@
             <div id="container">       
                 <nav id="leftmenu">
                     <h3>Food Types</h3>
-                    
-                    <button type="button" onclick ="displayDairyList()" class="accordion">Dairy</button>
-                                   
-                   <!--<button class="accordion">Dairy</button>-->
+
+                    <button type="button" onclick ="currentItem()" class="accordion">Dairy</button>
+
+                    <!--<button class="accordion">Dairy</button>-->
                     <div class="panel">     
                         <ul id = "dairyList" ></ul>
                     </div>
-                   
-                   <button type="button" onclick ="displayDairyList()" class="accordion">Meat</button>
-                                   
-                   <!--<button class="accordion">Dairy</button>-->
+
+                    <button type="button" onclick ="displayMenuList()" class="accordion">Meat</button>
+
+                    <!--<button class="accordion">Dairy</button>-->
                     <div class="panel">     
                         <ul id = "meatList" ></ul>
                     </div>
-                   
-                   <button type="button" onclick ="displayDairyList()" class="accordion">Vegetables</button>
-                                   
-                   <!--<button class="accordion">Dairy</button>-->
+
+                    <button type="button" onclick ="displayMenuList()" class="accordion">Vegetables</button>
+
+                    <!--<button class="accordion">Dairy</button>-->
                     <div class="panel">     
                         <ul id = "vegetableList" ></ul>
                     </div>
-                   
-                   <button type="button" onclick ="displayDairyList()" class="accordion">Cereals</button>
-                                   
-                   <!--<button class="accordion">Dairy</button>-->
+
+                    <button type="button" onclick ="displayMenuList()" class="accordion">Cereals</button>
+
+                    <!--<button class="accordion">Dairy</button>-->
                     <div class="panel">     
                         <ul id = "cerealList" ></ul>
                     </div>
+                    
+                    <button type="button" onclick ="displayMenuList()" class="accordion">Fruit</button>
 
-                   
+                    <!--<button class="accordion">Dairy</button>-->
+                    <div class="panel">     
+                        <ul id = "fruitList" ></ul>
+                    </div>
+
+
 
                     <p>
                         <input  type="text" id="query" name="search" placeholder="Search..">

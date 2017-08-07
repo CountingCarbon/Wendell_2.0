@@ -20,7 +20,6 @@ request.onupgradeneeded = function(event) {
 
     objectStore.add({email:'giveusmoney@gmail.com'});
 };
-
 //Call this function evertime you need to update the user and pass it the function that edits the specific part
 function updateCurrentUser(innerfunc){
     var transaction = db.transaction([osn]);
@@ -41,7 +40,6 @@ function updateCurrentUser(innerfunc){
         }
     };
 }
-
 function parameter(strg,email){
     //ravelobject
     usr = JSON.parse(strg, ravelForDb);
@@ -91,7 +89,6 @@ function getUser(email,func){
         }
     };
 }
-
 function readall(){
     var objectStore = db.transaction("user").objectStore("user");
     var request = objectStore.openCursor();
@@ -112,14 +109,12 @@ function readall(){
         console.log("That didn't work");
     };
 }
-
 function unravelForDb(key, value) {
     if (typeof value === 'function') {
         return value.toString();
     }
     return value;
 }
-
 function ravelForDb(key, value) {
 /////////usr2 = JSON.parse(objectstring, ravelForDb);
     if (value && typeof value === "string" && value.substr(0, 8) === "function") {
@@ -132,9 +127,8 @@ function ravelForDb(key, value) {
     }
     return value;
 }
-
 //Call the clear function when the page closes NBNBNBNBNBNBNB///////////////////
-window.onbeforeunload = cleardb;
+//window.onbeforeunload = cleardb;
 ////////////////////////////////////////////////////////////////////////////////
 //Delete and start again
 function cleardb(){
@@ -153,4 +147,4 @@ function cleardb(){
     };
 }
 ////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// ///////////////////////////////////////////////

@@ -17,7 +17,7 @@ quorn.isVegetarian = true;
 venison = new Meat("venison", 35, "C", 12, 115, ["protein", "fats", "Dairy"]);
 bacon = new Meat("bacon", 40, "E", 12, 115, ["protein", "fats", "Dairy"]);
 bacon.isHalal = false;
-halloumi = new Meat("holloumi", 30, "B", 12, 115, ["protein", "fats", "Dairy"]);
+halloumi = new Meat("halloumi", 30, "B", 12, 115, ["protein", "fats", "Dairy"]);
 halloumi.hasLactose = true;
 halloumi.isVegetarian = true;
 chicken = new Meat("chicken", 25, "B", 12, 115, ["protein", "fats", "Dairy"]);
@@ -35,7 +35,7 @@ tofu2 = new Dairy("silken tofu", 10, "A", 4.5, "140", ["protein", "fats", "Dairy
 tofu2.isVegan = true;
 
 foodData = [milk, beef, avocado, rice, banana, lamb, turkey, pork, tofu, quorn, venison, bacon, halloumi, chicken, ffmilk, ssmilk, soymilk, cheddar, eggs, goatscheese, cheesesubstitute, tofu2];
-
+userList = [];
 
 //******************************************************************************
 ////Set up database
@@ -57,10 +57,12 @@ if (!window.indexedDB) {
 var db;
 var request = window.indexedDB.open("foodDatabase", 3);
 
+//If database doesn't open correctly alert
 request.onerror = function (event) {
     console.log("error: Databse not open");
 };
 
+//If database opens run these functions and give success message
 request.onsuccess = function (event) {
     db = request.result;
     console.log("success: " + db);
@@ -68,8 +70,10 @@ request.onsuccess = function (event) {
     displayMenuList("dairy");
     displayMenuList("vegetable");
     displayMenuList("cereal");
+    nameResults();
 };
 
+//Add to the database
 request.onupgradeneeded = function (event) {
     db = event.target.result;
     var objectStore = db.createObjectStore("food", {keyPath: "name"});
@@ -79,9 +83,7 @@ request.onupgradeneeded = function (event) {
 };
 
 
-
-
-
+//Food constructor
 function food(name, E, H, P, cal, tag) {
     this.name = name;
     this.E = E; //environment
@@ -104,7 +106,7 @@ function food(name, E, H, P, cal, tag) {
 
 }
 
-
+//Dairy constructor
 function Dairy(name, E, H, P, cal, tag) {
     this.name = name;
     this.E = E; //environment
@@ -120,6 +122,7 @@ function Dairy(name, E, H, P, cal, tag) {
     this.type = "dairy";
 }
 
+//Meat constructor
 function Meat(name, E, H, P, cal, tag) {
     this.name = name;
     this.E = E; //environment
@@ -135,7 +138,7 @@ function Meat(name, E, H, P, cal, tag) {
     this.type = "meat";
 }
 
-
+//Vegetable constructor
 function Vegetable(name, E, H, P, cal, tag) {
     this.name = name;
     this.E = E; //environment
@@ -151,7 +154,7 @@ function Vegetable(name, E, H, P, cal, tag) {
     this.type = "vegetable";
 }
 
-
+//Fruit constructor
 function Fruit(name, E, H, P, cal, tag) {
     this.name = name;
     this.E = E; //environment
@@ -164,10 +167,10 @@ function Fruit(name, E, H, P, cal, tag) {
     this.isHalal = true;
     this.hasGluten = false;
     this.hasLactose = false;
-    this.type = "Fruit";
+    this.type = "fruit";
 }
 
-
+//Cereal constructor
 function Cereal(name, E, H, P, cal, tag) {
     this.name = name;
     this.E = E; //environment
@@ -183,12 +186,14 @@ function Cereal(name, E, H, P, cal, tag) {
     this.type = "cereal";
 }
 
+//Creating inheritance tree
 Cereal.prototype = new food();
 Vegetable.prototype = new food();
 Meat.prototype = new food();
 Dairy.prototype = new food();
 Fruit.prototype = new food();
 
+//Log to console all objects in database and whether current is true or false
 function readAll() {
     var objectStore = db.transaction(osn).objectStore(osn);
     var request = objectStore.openCursor();
@@ -201,7 +206,7 @@ function readAll() {
             console.log(cursor.value.current);
             cursor.continue();
         } else {
-            alert("No more entries!");
+            console.log("No more entries!");
         }
     };
 
@@ -210,6 +215,7 @@ function readAll() {
     };
 }
 
+//function to clear database
 function cleardb() {
     //Close database; can't delete and open database
     db.close();
@@ -229,47 +235,20 @@ function cleardb() {
     window.close(); //can't close a window the script didn't open
 }
 //Call the clear function when the page closes NBNBNBNBNBNBNB//////////////////////
-window.onbeforeunload = cleardb;
+//window.onbeforeunload = cleardb;
 
-/*function getObject() {
- //var name = prompt("What would you like to search").toLowerCase().trim();
- name = document.getElementById("query").value;
- name = name.toLowerCase().trim();
- var transaction = db.transaction([osn]);
- var objectStore = transaction.objectStore(osn);
- var request = objectStore.get(name);
- //if the get function returns an error
- request.onerror = function (event) {
- alert("Unable to retrieve data from database!");
- };
- //if the get function returns no errors (entry still not necessarily in the db)
- request.onsuccess = function (event) {
- if (request.result) {
- var details = [];
- var item = request.result;
- console.log(item.name);
- for(var i in item){
- details[i] = item[i];
- console.log(details[i]);
- }
- Display(item.name);
- // does not change other string
- } else {
- console.log("SHIT");
- }
- };
- }
- */
-function currentItem() {
+//Display product page.. currently same page as Search Results
+function productPage(name) {
+
     //var name = prompt("What would you like to search").toLowerCase().trim();
-    name = document.getElementById("query").value;
-    name = name.toLowerCase().trim();
+    //name = document.getElementById("query").value;
+    //name = name.toLowerCase().trim();
     var transaction = db.transaction([osn], "readwrite");
     var objectStore = transaction.objectStore(osn);
     var request = objectStore.get(name);
     //if the get function returns an error
     request.onerror = function (event) {
-        alert("Unable to retrieve data from database!");
+        Console.log("Unable to retrieve data from database!");
     };
     //if the get function returns no errors (entry still not necessarily in the db)
     request.onsuccess = function (event) {
@@ -278,11 +257,40 @@ function currentItem() {
         console.log(item.current);
         objectStore.put(item);
         readAll();
+        console.log("Current item ran");
 
     };
     window.location.href = "SearchResults.html";
 }
 
+//Sets the items current property to true and navigates to search results page
+function currentItem() {
+    setCurrentToFalse();
+
+    //var name = prompt("What would you like to search").toLowerCase().trim();
+    name = document.getElementById("query").value;
+    name = name.toLowerCase().trim();
+    var transaction = db.transaction([osn], "readwrite");
+    var objectStore = transaction.objectStore(osn);
+    var request = objectStore.get(name);
+    //if the get function returns an error
+    request.onerror = function (event) {
+        Console.log("Unable to retrieve data from database!");
+    };
+    //if the get function returns no errors (entry still not necessarily in the db)
+    request.onsuccess = function (event) {
+        var item = request.result;
+        item.current = true;
+        console.log(item.current);
+        objectStore.put(item);
+        readAll();
+        console.log("Current item ran");
+
+    };
+    window.location.href = "SearchResults.html";
+}
+
+//Edits search results page to only look at the current item
 function nameResults() {
     var objectStore = db.transaction([osn], "readwrite").objectStore(osn);
     var request = objectStore.openCursor();
@@ -297,6 +305,7 @@ function nameResults() {
             foodRequest.onsuccess = function () {
                 var item = foodRequest.result;
                 if (item.current === true) {
+
                     document.getElementById("nameOfFood").innerHTML = item.name;
                     //new
                     //health
@@ -314,8 +323,8 @@ function nameResults() {
                     list.appendChild(entry1);
                     list.appendChild(entry2);
                     list.appendChild(entry3);
-                    item.current = false;
-                    objectStore.put(item);
+                    console.log("done");
+
                 }
 
             };
@@ -327,8 +336,6 @@ function nameResults() {
             //console.log(item);
             //}
             cursor.continue();
-        } else {
-            console.log("No more entries!");
         }
     };
 
@@ -337,40 +344,7 @@ function nameResults() {
     };
 }
 
-
-/*function nameDisplay(name){
- //function to display on HTML screen
- document.write(name);   
- }*/
-
-/*
- function getProductInfo() {
- var name = getObject().name;
- var transaction = db.transaction([osn]);
- var objectStore = transaction.objectStore(osn);
- var request = objectStore.get(name);
- 
- request.onerror = function (event) {
- alert("Unable to retrieve data from database!");
- };
- 
- request.onsuccess = function (event) {
- var details = [];
- if (request.result) {
- for (var i in item) {
- details[i] = item[i];
- console.log((item[i]));
- }
- console.log(request.result.name);
- // does not change other string
- } else {
- console.log("SHIT");
- }
- };
- 
- }
- */
-
+//Adds list to users list
 function userList(user) {
     //ensure user is changed to current to enable to receive stuff from user
     //take user name from HTML
@@ -382,11 +356,11 @@ function userList(user) {
 
 
 }
+
+//Used for list page to display items in database
 function displayMenuList(Ftype) {
     var ID = Ftype + "List";
-    console.log(ID);
     var list = document.getElementById(ID);
-    console.log("entered successfully");
     var transaction = db.transaction([osn], "readwrite");
     var objectStore = transaction.objectStore(osn);
     var request = objectStore.openCursor();
@@ -399,10 +373,15 @@ function displayMenuList(Ftype) {
                 var item = cursor.value.name;
                 console.log(item);
                 var entry = document.createElement('li');
-                entry.appendChild(document.createTextNode(item));
-                list.appendChild(entry);
+                var entry1 = document.createElement('button');
+                var entry2 = document.createElement('a');
+                var Tfunction = "javascript: pushToSearch(" + item + ")";
+                entry2.setAttribute("href", Tfunction);
+                entry1.appendChild(document.createTextNode(item));
+                //entry2.href = "SearchResults.html";
+                list.appendChild(entry).appendChild(entry2).appendChild(entry1);
                 console.log(cursor.value.type);
-          }
+            }
             cursor.continue();
 
 
@@ -419,6 +398,64 @@ function displayMenuList(Ftype) {
 
 }
 
+//Used to add list items to array userList
+function addToList() {
+    var objectStore = db.transaction([osn], "readwrite").objectStore(osn);
+    var request = objectStore.openCursor();
+
+    objectStore.openCursor().onsuccess = function (event) {
+        var cursor = event.target.result;
+
+        if (cursor) {
+            if (cursor.value.current) {
+                userList.push(cursor.value.name);
+                console.log(userList);
+                //Need to include push to user object
+            }
+            cursor.continue();
+        } else {
+            console.log("No more entries!");
+        }
+    };
+
+    objectStore.openCursor().onerror = function (event) {
+        console.log("That didn't work");
+    };
+
+}
+
+//Allows list buttons to access product page
+function pushToSearch(name) {
+    console.log("Function running with:" + name.name);
+    productPage(name.name);
+
+}
+
+function setCurrentToFalse() {
+    console.log("setCurrenttoFalse is running");
+    var objectStore = db.transaction([osn], "readwrite").objectStore(osn);
+    var request = objectStore.openCursor();
+
+    objectStore.openCursor().onsuccess = function (event) {
+        var cursor = event.target.result;
+
+        if (cursor) {
+            if (cursor.value.current) {
+                var name = cursor.value.name;
+                var foodRequest = objectStore.get(name);
+                foodRequest.onsuccess = function (event) {
+                    var item = foodRequest.result;
+                    item.current = false;
+                    objectStore.put(item);
+
+                }
+            }
+            cursor.continue();
+        }
+
+    }
+}
+;
 
 
 
